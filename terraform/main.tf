@@ -1,4 +1,4 @@
-data "aws_security_group" "existing_sg" {
+data "aws_security_groups" "existing_sg" {
   filter {
     name   = "group-name"
     values = ["main-security-group"]
@@ -6,7 +6,7 @@ data "aws_security_group" "existing_sg" {
 }
 
 resource "aws_security_group" "main" {
-  count = length(data.aws_security_group.existing_sg.ids) == 0 ? 1 : 0
+  count = length(data.aws_security_groups.existing_sg.ids) == 0 ? 1 : 0
 
   name        = "main-security-group"
   description = "Security group for main application with minimal access"
@@ -49,5 +49,6 @@ module "ec2_instance" {
   ssh_user            = var.ssh_user
   script_path         = "modules/ec2_instance/setup.sh"
   tags                = var.tags
-  security_group_id   = length(data.aws_security_group.existing_sg.ids) > 0 ? data.aws_security_group.existing_sg.id : aws_security_group.main.id
+  security_group_id   = length(data.aws_security_groups.existing_sg.ids) > 0 ? data.aws_security_groups.existing_sg.ids[0] : aws_security_group.main[0].id
 }
+
