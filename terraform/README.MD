@@ -13,6 +13,7 @@ L'infrastructure déployée inclut :
 
 ## Prérequis
 
+
 - Terraform v0.12.x ou supérieur
 - Compte AWS avec les permissions IAM adéquates
 - AWS CLI configuré localement
