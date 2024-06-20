@@ -1,3 +1,7 @@
+data "aws_key_pair" "existing_key" {
+  key_name = var.key_name
+}
+
 data "aws_security_groups" "existing_sg" {
   filter {
     name   = "group-name"
@@ -45,10 +49,9 @@ module "ec2_instance" {
   aws_region          = var.aws_region
   instance_type       = var.instance_type
   ami_id              = var.ami_id
-  key_name            = var.key_name
+  key_name            = data.aws_key_pair.existing_key.key_name # Utilisation de la clé existante
   ssh_user            = var.ssh_user
-  script_path         = "modules/ec2_instance/setup.sh"
+  script_path         = var.script_path
   tags                = var.tags
   security_group_id   = length(data.aws_security_groups.existing_sg.ids) > 0 ? data.aws_security_groups.existing_sg.ids[0] : aws_security_group.main[0].id
 }
-

@@ -34,3 +34,9 @@ variable "tags" {
   type        = map(string)
   default     = {}
 }
+
+variable "script_path" {
+  description = "Path to the shell script to be executed on the instance"
+  type        = string
+  default     = "./modules/ec2_instance/setup.sh"
+}
