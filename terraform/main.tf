@@ -1,4 +1,13 @@
+data "aws_security_group" "existing_sg" {
+  filter {
+    name   = "group-name"
+    values = ["main-security-group"]
+  }
+}
+
 resource "aws_security_group" "main" {
+  count = length(data.aws_security_group.existing_sg.ids) == 0 ? 1 : 0
+
   name        = "main-security-group"
   description = "Security group for main application with minimal access"
 
@@ -20,8 +29,8 @@ resource "aws_security_group" "main" {
 
   ingress {
     description      = "Web application access"
-    from_port        = 3000
-    to_port          = 3000
+    from_port        = 8080
+    to_port          = 8080
     protocol         = "tcp"
     cidr_blocks      = ["0.0.0.0/0"]
   }
@@ -31,15 +40,14 @@ resource "aws_security_group" "main" {
   }
 }
 
-
 module "ec2_instance" {
-  source = "./modules/ec2_instance"
-  aws_region = var.aws_region
-  instance_type = var.instance_type
-  ami_id = var.ami_id
-  ssh_user = var.ssh_user
-  script_path = "modules/ec2_instance/setup.sh"
-  tags = var.tags
-  key_name = var.key_name
-  security_group_id = aws_security_group.main.id
+  source              = "./modules/ec2_instance"
+  aws_region          = var.aws_region
+  instance_type       = var.instance_type
+  ami_id              = var.ami_id
+  key_name            = var.key_name
+  ssh_user            = var.ssh_user
+  script_path         = "modules/ec2_instance/setup.sh"
+  tags                = var.tags
+  security_group_id   = length(data.aws_security_group.existing_sg.ids) > 0 ? data.aws_security_group.existing_sg.id : aws_security_group.main.id
 }
