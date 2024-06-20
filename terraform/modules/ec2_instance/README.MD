@@ -19,8 +19,6 @@ Ce module Terraform est utilisé pour provisionner une instance EC2 AWS avec des
 | `instance_type`   | Le type de l'instance EC2.                         | string | `t2.micro`      | Non    |
 | `ami_id`          | L'ID de l'AMI pour l'instance EC2.                 | string | -               | Oui    |
 | `key_name`        | Le nom de la paire de clés AWS à utiliser.         | string | -               | Oui    |
-| `private_key_path`| Le chemin vers la clé privée SSH sur la machine locale. | string | -          | Oui    |
-| `public_key_path` | Le chemin vers la clé publique SSH.                | string | -               | Oui    |
 | `ssh_user`        | Le nom d'utilisateur pour la connexion SSH.        | string | `ubuntu`        | Non    |
 | `script_path`     | Le chemin vers le script d'installation de l'application. | string | `setup.sh`  | Non    |
 | `tags`            | Les tags à appliquer à l'instance EC2.             | map    | `{}`            | Non    |
@@ -42,8 +40,6 @@ module "ec2_instance" {
   instance_type    = "t2.micro"
   ami_id           = "ami-0c55b159cbfafe1f0"
   key_name         = "my-aws-key"
-  private_key_path = "/path/to/my/private_key"
-  public_key_path  = "/path/to/my/public_key.pub"
   ssh_user         = "ubuntu"
   script_path      = "modules/ec2_instance/setup.sh"
   tags             = {

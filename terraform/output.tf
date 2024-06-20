@@ -4,6 +4,6 @@ output "ec2_instance_public_ip" {
 }
 
 output "ssh_command" {
-  value = "ssh -i ${var.private_key_path} ${var.ssh_user}@${module.ec2_instance.instance_public_ip}"
+  value       = "ssh -i ${var.key_name} ${var.ssh_user}@${module.ec2_instance.instance_public_ip}"
   description = "Command to connect to the instance via SSH"
 }

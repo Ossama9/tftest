@@ -32,21 +32,14 @@ resource "aws_security_group" "main" {
 }
 
 
-resource "aws_key_pair" "aws_key_ec2" {
-  key_name   = var.key_name
-  public_key = file(var.public_key_path)
-}
-
 module "ec2_instance" {
   source = "./modules/ec2_instance"
   aws_region = var.aws_region
   instance_type = var.instance_type
   ami_id = var.ami_id
-  private_key_path = var.private_key_path
-  public_key_path = var.public_key_path
   ssh_user = var.ssh_user
   script_path = "modules/ec2_instance/setup.sh"
   tags = var.tags
-  key_name = aws_key_pair.aws_key_ec2.key_name 
+  key_name = var.key_name
   security_group_id = aws_security_group.main.id
 }

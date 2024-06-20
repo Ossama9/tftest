@@ -12,14 +12,6 @@ variable "ami_id" {
   description = "The AMI ID for the EC2 instance"
 }
 
-variable "private_key_path" {
-  description = "Path to the private SSH key"
-}
-
-variable "public_key_path" {
-  description = "Path to the public SSH key file"
-}
-
 variable "ssh_user" {
   description = "SSH user to access EC2 instance"
   default     = "admin"
