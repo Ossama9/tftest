@@ -14,6 +14,5 @@ resource "aws_instance" "ec2_instance" {
   provisioner "remote-exec" {
     script = var.script_path
   }
-
   tags = var.tags
 }
