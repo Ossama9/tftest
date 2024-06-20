@@ -5,7 +5,7 @@ aws_region = "eu-west-3"
 instance_type = "t2.micro"
 
 # AMI ID for the EC2 instance
-ami_id = "ami-087da76081e7685da"
+ami_id = "ami-00ac45f3035ff009e"
 
 
 # SSH username for the EC2 instance connection
