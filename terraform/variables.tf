@@ -40,3 +40,9 @@ variable "script_path" {
   type        = string
   default     = "./modules/ec2_instance/setup.sh"
 }
+
+variable "private_key_path" {
+  description = "Path to the private SSH key"
+  type        = string
+  default     = "~/.ssh/id_rsa"
+}

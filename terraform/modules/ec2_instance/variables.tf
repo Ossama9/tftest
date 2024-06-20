@@ -38,3 +38,9 @@ variable "security_group_id" {
   description = "The ID of the security group to be associated with the EC2 instance"
   type        = string
 }
+
+variable "private_key_path" {
+  description = "Path to the private SSH key"
+  type        = string
+  default     = "~/.ssh/id_rsa"
+}
