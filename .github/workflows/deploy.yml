@@ -19,11 +19,12 @@ jobs:
 
       - name: Generate .env file
         run: |
-          cp .env.example .env
-          sed -i 's|^DB_URL=.*|DB_URL="postgres://new_user:new_password@new_host:5432/new_database"|' .env
-          sed -i 's|^MJ_APIKEY_PUBLIC=.*|MJ_APIKEY_PUBLIC=${{ secrets.MJ_APIKEY_PUBLIC }}|' .env
-          sed -i 's|^MJ_APIKEY_PRIVATE=.*|MJ_APIKEY_PRIVATE=${{ secrets.MJ_APIKEY_PRIVATE }}|' .env
-          sed -i 's|^Hello=.*|Hello="New Hello World"|' .env
+          cd /home/ubuntu/tftest
+          touch .env
+          echo "DB_URL=${{ secrets.DB_URL }}" >> .env
+          echo "MJ_APIKEY_PUBLIC=${{ secrets.MJ_APIKEY_PUBLIC }}" >> .env
+          echo "MJ_APIKEY_PRIVATE=${{ secrets.MJ_APIKEY_PRIVATE }}" >> .env
+          echo 'Hello="Hello World"' >> .env
 
       - name: Pull latest code
         run: |
