@@ -7,7 +7,7 @@ on:
 
 jobs:
   deploy:
-    runs-on: instace-ec2
+    runs-on: self-hosted
 
     steps:
       - name: Checkout code
