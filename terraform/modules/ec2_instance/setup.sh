@@ -1,19 +1,16 @@
 #!/bin/bash
 
-sudo apt-get update
-sudo apt-get upgrade -y
+# Mettre à jour le système
+sudo apt update
+sudo apt upgrade -y
 
 # Installer Go
-sudo apt-get install -y golang
+sudo apt install golang -y
 
-# Clonage du dépôt Git contenant le code de l'application
-git clone https://github.com/NhiSty/Colibris.git
+git clone https://github.com/Ossama9/tftest.git
 
-# Déplacement dans le répertoire du projet
-cd Colibris/Back
+cd tftest/
 
-# Compilation de l'application
-go build -o myapp
+go build -o back
 
-# Démarrage de l'application
-nohup ./myapp > app.log 2>&1 &
+nohup sudo ./back > back.log 2>&1 &

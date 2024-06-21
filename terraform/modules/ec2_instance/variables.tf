@@ -12,9 +12,17 @@ variable "ami_id" {
   description = "The AMI ID for the EC2 instance"
 }
 
+variable "private_key_path" {
+  description = "Path to the private SSH key"
+}
+
+variable "public_key_path" {
+  description = "Path to the public SSH key file"
+}
+
 variable "ssh_user" {
   description = "SSH user to access EC2 instance"
-  default     = "admin"
+  default     = "ubuntu"
 }
 
 variable "script_path" {
@@ -37,10 +45,4 @@ variable "key_name" {
 variable "security_group_id" {
   description = "The ID of the security group to be associated with the EC2 instance"
   type        = string
-}
-
-variable "private_key_path" {
-  description = "Path to the private SSH key"
-  type        = string
-  default     = "~/.ssh/id_rsa"
 }

@@ -18,9 +18,14 @@ func main() {
 
 	r.Use(cors.New(config))
 
+	r.GET("/", func(c *gin.Context) {
+		c.JSON(200, gin.H{
+			"message": "hey",
+		})
+	})
 	r.GET("/hello", func(c *gin.Context) {
 		c.JSON(200, gin.H{
-			"message": "hello world",
+			"message": "hello world test",
 		})
 	})
 
@@ -30,7 +35,7 @@ func main() {
 		})
 	})
 
-	err := r.Run(":5123")
+	err := r.Run(":80")
 	if err != nil {
 		return
 	}
