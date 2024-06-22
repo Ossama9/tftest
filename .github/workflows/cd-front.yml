@@ -16,7 +16,7 @@ jobs:
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.0.0' # Remplacez par la version de Flutter que vous utilisez
+          flutter-version: '3.22.2'
 
       - name: Install dependencies
         working-directory: ./Front
