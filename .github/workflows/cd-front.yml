@@ -26,9 +26,11 @@ jobs:
         working-directory: ./Front
         run: flutter build web
 
-
-      - name: Verify AWS CLI installation
+      - name: Verify aws
         run: aws --version
+
+      - name: Create AWS credentials directory
+        run: mkdir -p ~/.aws
 
       - name: Configure AWS credentials
         run: |
