@@ -58,3 +58,12 @@ module "ec2_instance" {
   key_name = aws_key_pair.aws_key_ec2.key_name 
   security_group_id = aws_security_group.main.id
 }
+
+module "s3_bucket" {
+  source = "./modules/s3_bucket"
+  bucket_name = "colibrisossama"
+  tags = {
+    Name        = "My bucket"
+    Environment = "Dev"
+  }
+}
