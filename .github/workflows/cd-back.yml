@@ -18,16 +18,9 @@ jobs:
           go version
 
       - name: Generate .env file
+        working-directory: /home/ubuntu/tftest
         run: |
-          cd /home/ubuntu/tftest
-          # Supprimer le fichier .env s'il existe
-          if [ -f .env ]; then
-          rm .env
-          fi
-          # Créer le fichier .env
-          touch .env
-          # Ajouter les valeurs des secrets GitHub au fichier .env
-          echo "DB_URL=${{ secrets.DB_URL }}" >> .env
+          echo "DB_URL=${{ secrets.DB_URL }}" > .env
           echo "MJ_APIKEY_PUBLIC=${{ secrets.MJ_APIKEY_PUBLIC }}" >> .env
           echo "MJ_APIKEY_PRIVATE=${{ secrets.MJ_APIKEY_PRIVATE }}" >> .env
           echo 'Hello="Hello World"' >> .env

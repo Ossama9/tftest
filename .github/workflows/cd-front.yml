@@ -18,6 +18,12 @@ jobs:
         with:
           flutter-version: '3.22.2'
 
+      - name: Generate .env file
+        working-directory: ./Front
+        run: |
+          echo "API_URL=${{secrets.API_URL}}" > .env
+          echo "MAPBOX_KEY=${{secrets.MAPBOX_KEY}}" >> .env
+
       - name: Install dependencies
         working-directory: ./Front
         run: flutter pub get
